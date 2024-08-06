@@ -1,0 +1,6 @@
+python-telegram-bot
+pandas
+SQLAlchemy
+pyodbc
+python-telegram-bot[job-queue]
+asyncio
