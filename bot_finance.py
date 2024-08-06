@@ -139,6 +139,34 @@ async def date(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             return DATE
         else:
             context.user_data["user_date"] = text
+            operation = context.user_data.get('operation_type')
+        if operation == 1:
+            query = '''select * from my_finance.bank_account'''
+            message = sql_select(database_name='main_db', sql=query)
+            message.set_index('id', inplace=True)
+            await update.message.reply_text(
+                f"{message.to_markdown()}")
+            await update.message.reply_text(
+                f"Напишите id карты списания")
+            return CARD_NUMBER
+        elif operation == 2:
+            query = '''select * from my_finance.bank_account'''
+            message = sql_select(database_name='main_db', sql=query)
+            message.set_index('id', inplace=True)
+            await update.message.reply_text(
+                f"{message.to_markdown()}")
+            await update.message.reply_text(
+                f"Напишите id карты на которую произошло пополнение")
+            return CARD_NUMBER
+        else:
+            query = '''select * from my_finance.bank_account'''
+            message = sql_select(database_name='main_db', sql=query)
+            message.set_index('id', inplace=True)
+            await update.message.reply_text(
+                f"{message.to_markdown()}")
+            await update.message.reply_text(
+                f"Сначала укажите айди карты списания")
+            return CARD_NUMBER
 
 
 async def card_number(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
