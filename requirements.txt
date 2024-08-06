@@ -4,3 +4,5 @@ SQLAlchemy
 pyodbc
 python-telegram-bot[job-queue]
 asyncio
+psycopg2-binary
+tabulate
