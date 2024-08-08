@@ -8,9 +8,23 @@ services:
       POSTGRES_PASSWORD: "qwerty12345"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-      - .:/docker-entrypoint-initdb.d
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - another-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
+  bot:
+    build:
+      context: ./
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: "main_db"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "qwerty12345"
+    depends_on:
+      - postgres
+    volumes:
+      - ./bot:/app
+
 volumes:
-  habrdb-data:
+  another-data:
